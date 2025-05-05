@@ -29,10 +29,10 @@ jobs:
           pip install cibuildwheel
 
       - name: Build wheels
-        run: cibuildwheel --output-dir wheelhouse
+        run: cibuildwheel --output-dir wheelhouse --enable-pypy
 
-      - name: Upload artifact  # 修正此处
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: your-artifact-name
-          path: path/to/file
+          name: my-artifact
+          path: wheelhouse/*
