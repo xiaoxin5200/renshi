@@ -1,0 +1,35 @@
+name: Build macOS Wheels
+
+# 只在 push 到 main 或 PR 到 main 时触发
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_wheels:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install cibuildwheel
+
+      - name: Build wheels
+        run: cibuildwheel --output-dir wheelhouse
+
+      - name: Upload wheels as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-wheelhouse
+          path: wheelhouse/*.whl
