@@ -31,8 +31,8 @@ jobs:
       - name: Build wheels
         run: cibuildwheel --output-dir wheelhouse
 
-      - - name: Upload artifact
-  uses: actions/upload-artifact@v3
-  with:
-    name: your-artifact-name
-    path: path/to/file
+      - name: Upload artifact  # 修正此处
+        uses: actions/upload-artifact@v3
+        with:
+          name: your-artifact-name
+          path: path/to/file
