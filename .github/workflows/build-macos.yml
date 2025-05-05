@@ -32,7 +32,7 @@ jobs:
         run: cibuildwheel --output-dir wheelhouse
 
       - name: Upload artifact  # 修正此处
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.x
         with:
           name: your-artifact-name
           path: path/to/file
