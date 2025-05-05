@@ -31,8 +31,8 @@ jobs:
       - name: Build wheels
         run: cibuildwheel --output-dir wheelhouse
 
-      - name: Upload wheels as artifact
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: macos-wheelhouse
-          path: wheelhouse/*.whl
+      - - name: Upload artifact
+  uses: actions/upload-artifact@v3
+  with:
+    name: your-artifact-name
+    path: path/to/file
