@@ -1,0 +1,23 @@
+os: osx
+language: python
+
+python:
+  - "3.9"
+
+install:
+  - pip install --upgrade pip
+  - pip install pyinstaller  # 如果你以后要做单文件 exe，可不装也行
+
+script:
+  # 用 cibuildwheel 生成 wheel
+  - pip install cibuildwheel
+  - cibuildwheel --output-dir wheelhouse
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN               # Travis 会自动提供
+  file_glob: true
+  file: wheelhouse/*.whl               # 上传所有生成的 wheel
+  skip_cleanup: true
+  on:
+    tags: true                         # 只有当你打 tag 时才发布
